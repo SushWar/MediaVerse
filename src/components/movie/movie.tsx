@@ -1,27 +1,24 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import axios from "axios"
 
-export default function MovieSection({ }: any) {
-  
-  useEffect(() => {
-    const tempCall = async () => {
-      try {
-        const callData = await axios.get("api/media")
-        console.log(callData)
-        
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    tempCall()
-  }, [])
-  
-    return (
-      <div>Movie Section
-        
-      </div >)
-  
+import { ListByGenre, RewindSwiper } from "@/components/reusableComp/reusable"
 
+export default function MovieSection({}: any) {
+  return (
+    <div className="pt-[2.6em]">
+      <div>
+        <div className="pt-[4em]">
+          <RewindSwiper
+            type={"movie"}
+            find={"revenue"}
+            genre={"null"}
+            page={"1"}
+          />
+        </div>
+        <div>
+          <ListByGenre type={"movie"} />
+        </div>
+      </div>
+    </div>
+  )
 }

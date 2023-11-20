@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import NavPanel from "@/components/header/navPanel"
 import Footer from "@/components/footer/footer"
+import TanstackProvider from "@/lib/ReactQueryProvider/ReactQuery"
 
 
 const inter = Inter({
@@ -23,15 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        
-        <header>
-          <NavPanel />
-        </header>
-        <main>{children}</main>
-        <footer>
-          <Footer />
-        </footer>
-        
+
+        <TanstackProvider>
+          <header>
+            <NavPanel />
+          </header>
+          <main>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </TanstackProvider>
+
       </body>
     </html>
   )

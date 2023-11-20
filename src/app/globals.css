@@ -18,10 +18,63 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  background: #0e111c;
+}
+
+.navBar_bg {
+  background: linear-gradient(270deg, #bca5ff 0%, #99ccd8 48.83%, #ffc907 100%);
+}
+
+.bigPoster {
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    60deg,
+    #0e111c 12.76%,
+    rgba(0, 0, 0, 0.69) 28.44%,
+    rgba(196, 196, 196, 0) 100%
+  );
+  height: calc(100% + 1px);
+}
+.theatrePoster_down {
+  background: linear-gradient(
+    0deg,
+    #0e111c 2.76%,
+    rgba(0, 0, 0, 0.69) 17.44%,
+    rgba(196, 196, 196, 0) 100%
+  );
+  height: calc(100% + 1px);
+}
+.theatrePoster_up {
+  background: linear-gradient(
+    180deg,
+    #0e111c 2.76%,
+    rgba(0, 0, 0, 0.69) 44.44%,
+    rgba(196, 196, 196, 0) 100%
+  );
+  height: calc(100% + 1px);
+}
+
+.theatrePoster_left {
+  background: linear-gradient(
+    90deg,
+    #0e111c 12.76%,
+    rgba(0, 0, 0, 0) 28.44%,
+    rgba(196, 196, 196, 0) 100%
+  );
+  height: calc(100% + 1px);
+}
+
+.horizontal_list_bg {
+  background: linear-gradient(
+    90deg,
+    #0e111c 18.25%,
+    #87888b 46.99%,
+    #0e111c 77.03%
+  );
+}
+
+.reccomendation_text_colour {
+  background: linear-gradient(180deg, #b8ebe7 47%, rgba(54, 37, 37, 0) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
