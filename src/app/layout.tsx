@@ -5,6 +5,7 @@ import NavPanel from "@/components/header/navPanel"
 import Footer from "@/components/footer/footer"
 import TanstackProvider from "@/lib/ReactQueryProvider/ReactQuery"
 
+
 const inter = Inter({
   subsets: ["latin"],
   weight: "500",
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
+
         <TanstackProvider>
           <header>
             <NavPanel />
@@ -32,6 +34,7 @@ export default function RootLayout({
             <Footer />
           </footer>
         </TanstackProvider>
+
       </body>
     </html>
   )

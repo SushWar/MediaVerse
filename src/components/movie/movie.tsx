@@ -1,5 +1,6 @@
 "use client"
 
+
 import { ListByGenre, RewindSwiper } from "@/components/reusableComp/reusable"
 
 export default function MovieSection({}: any) {
