@@ -2,10 +2,11 @@
 
 import axios from "axios"
 
-export default function NewsSection({}: any) {
+export default function NewsSection(prop: any) {
   const dynamicLocater = async () => {
     try {
       console.log("Inside NEWS TRY 1")
+      const url = new URL("http://localhost:3000/api/media/ott/locate")
       const sendParams = {
         type: "movie",
         find: "revenue",
@@ -13,10 +14,9 @@ export default function NewsSection({}: any) {
         year: "2023",
         page: "1",
       }
+      url.search = new URLSearchParams(sendParams).toString()
       console.log("Inside NEWS TRY 2")
-      const dynamicData = await axios.get("/api/media/ott/locate", {
-        params: sendParams,
-      })
+      const dynamicData = await axios.get(`${url}`)
       console.log("Inside NEWS TRY 3")
       console.log("Inside News section")
       console.log(dynamicData)

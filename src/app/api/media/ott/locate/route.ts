@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+export const dynamicParams = true
 import { NextResponse, NextRequest } from "next/server"
 import axios from "axios"
 
@@ -7,7 +9,7 @@ const tmdbDomain = process.env.TMDB_DOMAIN!
 export async function GET(req: NextRequest) {
   try {
     console.log("Inside server TRY 1")
-    const reqPref = req.nextUrl.search.split("?")[1].split("&")
+    const reqPref = await req.nextUrl.search.split("?")[1].split("&")
     console.log("Inside server TRY 2")
     const extractParams = {
       type: reqPref[0].split("=")[1],
@@ -46,7 +48,7 @@ export async function GET(req: NextRequest) {
     })
 
     console.log("Inside server TRY 6")
-    console.log(filterData)
+
     return NextResponse.json(filterData, { status: 200 })
   } catch (error: any) {
     console.log("Inside server CATCH 1")

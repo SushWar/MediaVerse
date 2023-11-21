@@ -1,4 +1,3 @@
-"use client"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards, EffectCreative, Navigation, Grid } from "swiper/modules"
 import "swiper/css"
@@ -19,7 +18,6 @@ import { removeSpace } from "@/helper/stringHelper"
 function RewindSwiper({ type, find, genre, page }: any) {
   const dynamicLocater = async () => {
     try {
-      console.log("Inside Rewind swiper TRY 1")
       const sendParams = {
         type: type,
         find: find,
@@ -27,15 +25,11 @@ function RewindSwiper({ type, find, genre, page }: any) {
         year: "2023",
         page: page,
       }
-      console.log("Inside Rewind swiper TRY 2")
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
-      console.log("Inside Rewind swiper TRY 3")
-      console.log(dynamicData)
       return dynamicData.data
     } catch (error) {
-      console.log("Inside Rewind swiper CATCH 1")
       return null
     }
   }
@@ -61,7 +55,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
   if (isSuccess) {
     return (
       <div className=" text-black overflow-x-auto">
-        {/* <Swiper
+        <Swiper
           rewind={true}
           navigation={true}
           modules={[Navigation]}
@@ -83,15 +77,13 @@ function RewindSwiper({ type, find, genre, page }: any) {
                 )
               }
             })}
-        </Swiper> */}
-        Data from swiper
+        </Swiper>
       </div>
     )
   }
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div>
-        <div>Rewind swiper</div>
         <CircularProgress />
       </div>
     </div>
@@ -534,7 +526,7 @@ function ListByGenre({ type }: any) {
     return (
       <div>
         Data from List by genre
-        {/* {data.pages.map((page, i) => {
+        {data.pages.map((page, i) => {
           return (
             <div key={i}>
               {page &&
@@ -554,7 +546,11 @@ function ListByGenre({ type }: any) {
             </div>
           )
         })}
-        {isFetchingNextPage && <div>Loading more...</div>} */}
+        {isFetchingNextPage && (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
       </div>
     )
   }
@@ -568,6 +564,8 @@ function ListByGenre({ type }: any) {
     </div>
   )
 }
+
+//--------------------------------------------------------------------WATCH FUNCTIONS-------------------------------------------------------------------------------------------------------------
 
 function Theatre({ type, id }: any) {
   const matches = useMediaQuery("(min-width:1024px)")

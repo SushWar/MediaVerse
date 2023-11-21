@@ -1,5 +1,4 @@
 "use client"
-
 import { ListByGenre, RewindSwiper } from "@/components/reusableComp/reusable"
 
 export default function MovieSection({}: any) {
@@ -14,9 +13,9 @@ export default function MovieSection({}: any) {
             page={"1"}
           />
         </div>
-        {/* <div>
+        <div>
           <ListByGenre type={"movie"} />
-        </div> */}
+        </div>
       </div>
     </div>
   )

@@ -120,7 +120,7 @@ export default function HomeSection({}: any) {
   if (isSuccess) {
     return (
       <div className="pt-[2.6em]">
-        {/* {data.pages.map((page, i) => {
+        {data.pages.map((page, i) => {
           return (
             <div key={i}>
               {page &&
@@ -133,8 +133,12 @@ export default function HomeSection({}: any) {
                 })}
             </div>
           )
-        })} */}
-        {/* {isFetchingNextPage && <div>Loading more...</div>} */}
+        })}
+        {isFetchingNextPage && (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
       </div>
     )
   }
@@ -142,7 +146,6 @@ export default function HomeSection({}: any) {
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div>
-        <div>Testing</div>
         <CircularProgress />
       </div>
     </div>

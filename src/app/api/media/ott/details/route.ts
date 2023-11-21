@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+export const dynamicParams = true
 import { NextResponse, NextRequest } from "next/server"
 import axios from "axios"
 
