@@ -28,7 +28,8 @@ function RewindSwiper({ type, find, genre, page }: any) {
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
-      console.log(dynamicData)
+
+      console.log("Inside Client" + dynamicData)
       return dynamicData.data
     } catch (error) {
       return null

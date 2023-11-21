@@ -43,8 +43,10 @@ export async function GET(req: NextRequest) {
       }
     })
 
+    console.log("Inside server" + filterData)
     return NextResponse.json(filterData, { status: 200 })
   } catch (error: any) {
+    console.log("Inside server" + error.message)
     return NextResponse.json(error)
   }
 }
