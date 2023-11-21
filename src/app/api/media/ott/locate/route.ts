@@ -6,7 +6,9 @@ const tmdbDomain = process.env.TMDB_DOMAIN!
 
 export async function GET(req: NextRequest) {
   try {
+    console.log("Inside server TRY 1")
     const reqPref = req.nextUrl.search.split("?")[1].split("&")
+    console.log("Inside server TRY 2")
     const extractParams = {
       type: reqPref[0].split("=")[1],
       find: reqPref[1].split("=")[1],
@@ -14,7 +16,7 @@ export async function GET(req: NextRequest) {
       year: reqPref[3].split("=")[1],
       page: reqPref[4].split("=")[1],
     }
-
+    console.log("Inside server TRY 3")
     const getParams = {
       api_key: tmdbApiKey,
       include_adult: false,
@@ -26,12 +28,12 @@ export async function GET(req: NextRequest) {
       with_genres: extractParams.genre,
       primary_release_year: extractParams.year,
     }
-
+    console.log("Inside server TRY 4")
     const getData = await axios.get(
       `${tmdbDomain}discover/${extractParams.type}`,
       { params: getParams }
     )
-
+    console.log("Inside server TRY 5")
     const filterData = getData.data.results.map((item: any) => {
       if (item.backdrop_path && item.poster_path) {
         return {
@@ -43,11 +45,11 @@ export async function GET(req: NextRequest) {
       }
     })
 
-    console.log("Inside server TRY")
+    console.log("Inside server TRY 6")
     console.log(filterData)
     return NextResponse.json(filterData, { status: 200 })
   } catch (error: any) {
-    console.log("Inside server CATCH")
+    console.log("Inside server CATCH 1")
     console.log(error.message)
     return NextResponse.json(error)
   }

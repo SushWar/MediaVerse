@@ -19,6 +19,7 @@ import { removeSpace } from "@/helper/stringHelper"
 function RewindSwiper({ type, find, genre, page }: any) {
   const dynamicLocater = async () => {
     try {
+      console.log("Inside Rewind swiper TRY 1")
       const sendParams = {
         type: type,
         find: find,
@@ -26,13 +27,15 @@ function RewindSwiper({ type, find, genre, page }: any) {
         year: "2023",
         page: page,
       }
+      console.log("Inside Rewind swiper TRY 2")
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
-      console.log("Inside Rewind swiper")
+      console.log("Inside Rewind swiper TRY 3")
       console.log(dynamicData)
       return dynamicData.data
     } catch (error) {
+      console.log("Inside Rewind swiper CATCH 1")
       return null
     }
   }
