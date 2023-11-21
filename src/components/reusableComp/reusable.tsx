@@ -1,3 +1,4 @@
+"use client"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards, EffectCreative, Navigation, Grid } from "swiper/modules"
 import "swiper/css"
@@ -28,8 +29,8 @@ function RewindSwiper({ type, find, genre, page }: any) {
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
-
-      console.log("Inside Client" + dynamicData)
+      console.log("Inside Rewind swiper")
+      console.log(dynamicData)
       return dynamicData.data
     } catch (error) {
       return null
