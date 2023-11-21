@@ -138,4 +138,12 @@ export default function HomeSection({}: any) {
       </div>
     )
   }
+
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }

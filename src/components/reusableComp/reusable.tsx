@@ -81,6 +81,13 @@ function RewindSwiper({ type, find, genre, page }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function BigPoster({ item, type }: any) {
@@ -261,6 +268,13 @@ function HorizontalList({ type, find, genre, page, listHead }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function NewsLayoutOne({ country, pages }: any) {
@@ -330,6 +344,13 @@ function NewsLayoutOne({ country, pages }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function SwiperEffectCards({ firstHalf }: any) {
@@ -528,6 +549,14 @@ function ListByGenre({ type }: any) {
       </div>
     )
   }
+
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function Theatre({ type, id }: any) {
@@ -664,6 +693,14 @@ function Theatre({ type, id }: any) {
       </div>
     )
   }
+
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function SeasonDetails({ id, parentSeason }: any) {
@@ -1044,6 +1081,13 @@ function RecomendationGenre({ type, id }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 export { RewindSwiper, HorizontalList, NewsLayoutOne, ListByGenre, Theatre }
