@@ -525,7 +525,6 @@ function ListByGenre({ type }: any) {
   if (isSuccess) {
     return (
       <div>
-        Data from List by genre
         {data.pages.map((page, i) => {
           return (
             <div key={i}>

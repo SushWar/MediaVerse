@@ -8,21 +8,32 @@ const tmdbDomain = process.env.TMDB_DOMAIN!
 
 export async function GET(req: NextRequest) {
   try {
-    console.log("Inside server TRY 1")
-    const reqPref = await req.nextUrl.search.split("?")[1].split("&")
-    console.log("Inside server TRY 2")
+    // const { type, find, genre, year, page }: any =
+    //   req.nextUrl.searchParams.getAll
+    // console.log(type + "\n" + find + "\n" + genre + "\n" + year + "\n" + page)
     const extractParams = {
-      type: reqPref[0].split("=")[1],
-      find: reqPref[1].split("=")[1],
-      genre: reqPref[2].split("=")[1],
-      year: reqPref[3].split("=")[1],
-      page: reqPref[4].split("=")[1],
+      type: req.nextUrl.searchParams.get("type"),
+      find: req.nextUrl.searchParams.get("find"),
+      genre: req.nextUrl.searchParams.get("genre"),
+      year: req.nextUrl.searchParams.get("year"),
+      page: req.nextUrl.searchParams.get("page"),
     }
+
+    console.log("Inside server TRY 1")
+    const reqPref = req.nextUrl.search.split("?")[1].split("&")
+    console.log("Inside server TRY 2")
+    // const extractParams = {
+    //   type: reqPref[0].split("=")[1],
+    //   find: reqPref[1].split("=")[1],
+    //   genre: reqPref[2].split("=")[1],
+    //   year: reqPref[3].split("=")[1],
+    //   page: reqPref[4].split("=")[1],
+    // }
     console.log("Inside server TRY 3")
     const getParams = {
       api_key: tmdbApiKey,
       include_adult: false,
-      language: "en - US",
+      language: "en-US",
       page: extractParams.page,
       sort_by: `${extractParams.find}.desc`,
       watch_region: "IN",
