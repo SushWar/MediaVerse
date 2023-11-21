@@ -4,7 +4,7 @@ import "./globals.css"
 import NavPanel from "@/components/header/navPanel"
 import Footer from "@/components/footer/footer"
 import TanstackProvider from "@/lib/ReactQueryProvider/ReactQuery"
-
+export const dynamic = "force-dynamic"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-
         <TanstackProvider>
           <header>
             <NavPanel />
@@ -34,7 +33,6 @@ export default function RootLayout({
             <Footer />
           </footer>
         </TanstackProvider>
-
       </body>
     </html>
   )
