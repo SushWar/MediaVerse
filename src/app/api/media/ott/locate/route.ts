@@ -15,8 +15,21 @@ export async function GET(req: NextRequest) {
       page: reqPref[4].split("=")[1],
     }
 
+    const getParams = {
+      api_key: tmdbApiKey,
+      include_adult: false,
+      language: "en - US",
+      page: extractParams.page,
+      sort_by: `${extractParams.find}.desc`,
+      watch_region: "IN",
+      with_watch_monetization_types: "free|ads|flatrate",
+      with_genres: extractParams.genre,
+      primary_release_year: extractParams.year,
+    }
+
     const getData = await axios.get(
-      `${tmdbDomain}discover/${extractParams.type}?api_key=${tmdbApiKey}&include_adult=false&language=en-US&page=${extractParams.page}&sort_by=${extractParams.find}.desc&watch_region=IN&with_watch_monetization_types=free|ads|flatrate&with_genres=${extractParams.genre}&primary_release_year=${extractParams.year}`
+      `${tmdbDomain}discover/${extractParams.type}`,
+      { params: getParams }
     )
 
     const filterData = getData.data.results.map((item: any) => {
@@ -30,8 +43,10 @@ export async function GET(req: NextRequest) {
       }
     })
 
+    console.log("Inside server" + filterData)
     return NextResponse.json(filterData, { status: 200 })
   } catch (error: any) {
+    console.log("Inside server" + error.message)
     return NextResponse.json(error)
   }
 }

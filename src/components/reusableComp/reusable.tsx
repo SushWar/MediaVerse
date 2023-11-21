@@ -28,6 +28,8 @@ function RewindSwiper({ type, find, genre, page }: any) {
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
+
+      console.log("Inside Client" + dynamicData)
       return dynamicData.data
     } catch (error) {
       return null
@@ -55,7 +57,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
   if (isSuccess) {
     return (
       <div className=" text-black overflow-x-auto">
-        <Swiper
+        {/* <Swiper
           rewind={true}
           navigation={true}
           modules={[Navigation]}
@@ -77,10 +79,19 @@ function RewindSwiper({ type, find, genre, page }: any) {
                 )
               }
             })}
-        </Swiper>
+        </Swiper> */}
+        Data from swiper
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <div>Rewind swiper</div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function BigPoster({ item, type }: any) {
@@ -261,6 +272,13 @@ function HorizontalList({ type, find, genre, page, listHead }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function NewsLayoutOne({ country, pages }: any) {
@@ -330,6 +348,13 @@ function NewsLayoutOne({ country, pages }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function SwiperEffectCards({ firstHalf }: any) {
@@ -504,7 +529,8 @@ function ListByGenre({ type }: any) {
   if (isSuccess) {
     return (
       <div>
-        {data.pages.map((page, i) => {
+        Data from List by genre
+        {/* {data.pages.map((page, i) => {
           return (
             <div key={i}>
               {page &&
@@ -524,10 +550,19 @@ function ListByGenre({ type }: any) {
             </div>
           )
         })}
-        {isFetchingNextPage && <div>Loading more...</div>}
+        {isFetchingNextPage && <div>Loading more...</div>} */}
       </div>
     )
   }
+
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <div>List by genre</div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function Theatre({ type, id }: any) {
@@ -664,6 +699,14 @@ function Theatre({ type, id }: any) {
       </div>
     )
   }
+
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 function SeasonDetails({ id, parentSeason }: any) {
@@ -1044,6 +1087,13 @@ function RecomendationGenre({ type, id }: any) {
       </div>
     )
   }
+  return (
+    <div className=" min-h-screen flex justify-center items-center">
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  )
 }
 
 export { RewindSwiper, HorizontalList, NewsLayoutOne, ListByGenre, Theatre }
