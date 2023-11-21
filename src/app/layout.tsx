@@ -5,6 +5,7 @@ import NavPanel from "@/components/header/navPanel"
 import Footer from "@/components/footer/footer"
 import TanstackProvider from "@/lib/ReactQueryProvider/ReactQuery"
 export const dynamic = "force-dynamic"
+export const dynamicParams = true
 
 const inter = Inter({
   subsets: ["latin"],
