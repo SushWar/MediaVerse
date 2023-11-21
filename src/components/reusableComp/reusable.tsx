@@ -28,6 +28,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
+      console.log(dynamicData)
       return dynamicData.data
     } catch (error) {
       return null
@@ -85,6 +86,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div>
+        <div>Rewind swiper</div>
         <CircularProgress />
       </div>
     </div>
@@ -555,6 +557,7 @@ function ListByGenre({ type }: any) {
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div>
+        <div>List by genre</div>
         <CircularProgress />
       </div>
     </div>
