@@ -8,15 +8,26 @@ const tmdbDomain = process.env.TMDB_DOMAIN!
 
 export async function GET(req: NextRequest) {
   try {
-    const reqPref = req.nextUrl.search.split("?")[1].split("&")
+    console.log("Inside GENRE server TRY block :- Getting params from url")
+
     const extractParams = {
-      type: reqPref[0].split("=")[1],
+      type: req.nextUrl.searchParams.get("type"),
     }
+    console.log("Inside GENRE server TRY block :- Sending TMDB API call")
+
     const getData = await axios.get(
       `${tmdbDomain}genre/${extractParams.type}/list?api_key=${tmdbApiKey}`
     )
+
+    console.log("Inside GENRE server TRY block :-sending Data to client")
     return NextResponse.json(getData.data)
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Inside GENRE server CATCH block :- " + error.message)
     return NextResponse.json(error)
   }
+
+  // const reqPref = req.nextUrl.search.split("?")[1].split("&")
+  // const extractParams = {
+  //   type: reqPref[0].split("=")[1],
+  // }
 }
