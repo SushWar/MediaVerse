@@ -55,7 +55,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
   if (isSuccess) {
     return (
       <div className=" text-black overflow-x-auto">
-        <Swiper
+        {/* <Swiper
           rewind={true}
           navigation={true}
           modules={[Navigation]}
@@ -77,7 +77,8 @@ function RewindSwiper({ type, find, genre, page }: any) {
                 )
               }
             })}
-        </Swiper>
+        </Swiper> */}
+        Data from swiper
       </div>
     )
   }
@@ -525,7 +526,8 @@ function ListByGenre({ type }: any) {
   if (isSuccess) {
     return (
       <div>
-        {data.pages.map((page, i) => {
+        Data from List by genre
+        {/* {data.pages.map((page, i) => {
           return (
             <div key={i}>
               {page &&
@@ -545,7 +547,7 @@ function ListByGenre({ type }: any) {
             </div>
           )
         })}
-        {isFetchingNextPage && <div>Loading more...</div>}
+        {isFetchingNextPage && <div>Loading more...</div>} */}
       </div>
     )
   }
