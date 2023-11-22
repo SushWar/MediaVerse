@@ -28,8 +28,6 @@ function RewindSwiper({ type, find, genre, page }: any) {
       const dynamicData = await axios.get("/api/media/ott/locate", {
         params: sendParams,
       })
-
-      console.log("Inside Client" + dynamicData)
       return dynamicData.data
     } catch (error) {
       return null
@@ -57,7 +55,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
   if (isSuccess) {
     return (
       <div className=" text-black overflow-x-auto">
-        {/* <Swiper
+        <Swiper
           rewind={true}
           navigation={true}
           modules={[Navigation]}
@@ -79,15 +77,13 @@ function RewindSwiper({ type, find, genre, page }: any) {
                 )
               }
             })}
-        </Swiper> */}
-        Data from swiper
+        </Swiper>
       </div>
     )
   }
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div>
-        <div>Rewind swiper</div>
         <CircularProgress />
       </div>
     </div>
@@ -529,8 +525,7 @@ function ListByGenre({ type }: any) {
   if (isSuccess) {
     return (
       <div>
-        Data from List by genre
-        {/* {data.pages.map((page, i) => {
+        {data.pages.map((page, i) => {
           return (
             <div key={i}>
               {page &&
@@ -550,7 +545,11 @@ function ListByGenre({ type }: any) {
             </div>
           )
         })}
-        {isFetchingNextPage && <div>Loading more...</div>} */}
+        {isFetchingNextPage && (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
       </div>
     )
   }
@@ -564,6 +563,8 @@ function ListByGenre({ type }: any) {
     </div>
   )
 }
+
+//--------------------------------------------------------------------WATCH FUNCTIONS-------------------------------------------------------------------------------------------------------------
 
 function Theatre({ type, id }: any) {
   const matches = useMediaQuery("(min-width:1024px)")
