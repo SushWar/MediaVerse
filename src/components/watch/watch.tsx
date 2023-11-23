@@ -7,6 +7,8 @@ import { Theatre } from "../reusableComp/reusable"
 import { CircularProgress } from "@mui/material"
 
 export default function WatchSection({ params }: any) {
+  // console.log(params)
+
   const [detail, setDetails] = useState({
     type: "",
     id: "",

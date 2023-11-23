@@ -5,7 +5,7 @@ export default function MovieSection({}: any) {
   return (
     <div className="pt-[2.6em]">
       <div>
-        <div className="pt-[4em]">
+        <div className="pt-[2.8em] lg:pt-[4em]">
           <RewindSwiper
             type={"movie"}
             find={"revenue"}

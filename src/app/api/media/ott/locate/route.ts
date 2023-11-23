@@ -49,6 +49,7 @@ export async function GET(req: NextRequest) {
           backdrop: `https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${item.backdrop_path}`,
           title: item.name || item.title,
           poster: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+          type: extractParams.type,
         }
       }
     })

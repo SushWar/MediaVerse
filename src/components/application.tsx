@@ -126,7 +126,7 @@ export default function HomeSection({}: any) {
               {page &&
                 page.map((item: any, key: any) => {
                   return (
-                    <div key={key} ref={ref} className="pt-[4em]">
+                    <div key={key} ref={ref} className="pt-[2.8em] lg:pt-[4em]">
                       {item.func}
                     </div>
                   )

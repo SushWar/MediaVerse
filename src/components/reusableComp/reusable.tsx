@@ -7,13 +7,21 @@ import "swiper/css/effect-creative"
 import "swiper/css/grid"
 import axios from "axios"
 import Image from "next/image"
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { CircularProgress, useMediaQuery } from "@mui/material"
 import Skeleton from "@mui/material/Skeleton"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { removeSpace } from "@/helper/stringHelper"
+import CloseIcon from "@mui/icons-material/Close"
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
+
+//START----------------------------------------------------------------------------------Big Banner---------------------------------------------------------------------------------------------------
 
 function RewindSwiper({ type, find, genre, page }: any) {
   const dynamicLocater = async () => {
@@ -169,6 +177,10 @@ function BigPoster({ item, type }: any) {
   )
 }
 
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//START-------------------------------------------------------------------------------------Horizontal List-----------------------------------------------------------------------------------------
+
 function HorizontalList({ type, find, genre, page, listHead }: any) {
   const dynamicLocater = async () => {
     try {
@@ -210,7 +222,7 @@ function HorizontalList({ type, find, genre, page, listHead }: any) {
   if (isSuccess) {
     return (
       <div className=" px-5">
-        <div className=" text-3xl">
+        <div className=" text-3xl text-[#e6efff]">
           <h2>{listHead}</h2>
         </div>
         <div className="">
@@ -250,14 +262,20 @@ function HorizontalList({ type, find, genre, page, listHead }: any) {
                   return (
                     <SwiperSlide key={key}>
                       <div className=" py-2">
-                        <Image
-                          src={item.poster}
-                          alt={item.title}
-                          width={500}
-                          height={600}
-                          loading="lazy"
-                          className=" rounded-2xl w-auto h-auto"
-                        ></Image>
+                        <Link
+                          href={`/watch/${removeSpace(item.title)}?${type}=${
+                            item.id
+                          }`}
+                        >
+                          <Image
+                            src={item.poster}
+                            alt={item.title}
+                            width={500}
+                            height={600}
+                            loading="lazy"
+                            className=" rounded-2xl w-auto h-auto"
+                          ></Image>
+                        </Link>
                       </div>
                     </SwiperSlide>
                   )
@@ -276,6 +294,10 @@ function HorizontalList({ type, find, genre, page, listHead }: any) {
     </div>
   )
 }
+
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//START-------------------------------------------------------------------------------------2 News object together -----------------------------------------------------------------------------------------
 
 function NewsLayoutOne({ country, pages }: any) {
   const [middle, setMiddle] = useState(0)
@@ -325,7 +347,7 @@ function NewsLayoutOne({ country, pages }: any) {
           variant="rectangular"
           width={"100%"}
           height={"20vw"}
-          style={{ backgroundColor: "grey" }}
+          style={{ backgroundColor: "grey", borderRadius: "1rem" }}
         />
       </div>
     )
@@ -373,7 +395,6 @@ function SwiperEffectCards({ firstHalf }: any) {
         {firstHalf.map((item: any, key: any) => {
           return (
             <SwiperSlide key={key}>
-              {" "}
               <div className=" bg-[#d3dfff] text-black rounded-[18px] h-full">
                 <div>
                   <img
@@ -471,6 +492,10 @@ function SwiperCardLeft({ secondHalf }: any) {
   )
 }
 
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//START-------------------------------------------------------------------------------------Genre List-----------------------------------------------------------------------------------------
+
 function ListByGenre({ type }: any) {
   const { ref, inView } = useInView()
 
@@ -564,7 +589,9 @@ function ListByGenre({ type }: any) {
   )
 }
 
-//--------------------------------------------------------------------WATCH FUNCTIONS-------------------------------------------------------------------------------------------------------------
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Start-----------------------------------------------------------------WATCH FUNCTIONS-------------------------------------------------------------------------------------------------------------
 
 function Theatre({ type, id }: any) {
   const matches = useMediaQuery("(min-width:1024px)")
@@ -663,13 +690,15 @@ function Theatre({ type, id }: any) {
             <div className="absolute top-1 h-full left-0 w-full">
               <div className=" w-[90%] m-auto py-8 ">
                 <div>
-                  <div className=" md:w-1/2 py-3 text-[#fbf0f0]">
-                    <div className="text-[#afa2ee]">Storyline</div>
-                    <div className="pl-4 pt-3">{data.data.overview}</div>
+                  <div className=" md:w-1/2 py-3 ">
+                    <div className="text-[#afa2ee] text-xl">Storyline</div>
+                    <div className="pl-4 pt-3 text-[#fbf0f0]">
+                      {data.data.overview}
+                    </div>
                   </div>
                   <div className="py-3">
-                    <div className="text-[#afa2ee]">Genre</div>
-                    <div className="pl-4 pt-3 flex gap-3">
+                    <div className="text-[#afa2ee] text-xl">Genre</div>
+                    <div className="pl-4 pt-3 flex gap-3 text-[#fbf0f0]">
                       {data.data.genres.map((item: any, key: any) => {
                         return (
                           <div key={key}>
@@ -681,8 +710,8 @@ function Theatre({ type, id }: any) {
                     </div>
                   </div>
                   <div className="py-3">
-                    <div className=" text-[#afa2ee]">Popularity</div>
-                    <div className="pl-4 pt-3">
+                    <div className=" text-[#afa2ee] text-xl">Popularity</div>
+                    <div className="pl-4 pt-3 text-[#fbf0f0]">
                       {data.data.vote_average.toFixed(1)}
                     </div>
                   </div>
@@ -892,7 +921,7 @@ function ShowEpisode({ data }: any) {
 function CastDetails({ credits }: any) {
   return (
     <div>
-      <div className="text-[#afa2ee]">Cast & Crew</div>
+      <div className="text-[#afa2ee] text-xl">Cast & Crew</div>
       <Swiper
         modules={[Navigation]}
         grabCursor={true}
@@ -937,7 +966,7 @@ function CastDetails({ credits }: any) {
                     className="rounded-2xl"
                   ></Image>
                   <div>
-                    <div>{item.name}</div>
+                    <div className="text-[#fbf0f0]">{item.name}</div>
                     <div className=" text-slate-500">{item.character}</div>
                   </div>
                 </div>
@@ -1097,4 +1126,243 @@ function RecomendationGenre({ type, id }: any) {
   )
 }
 
-export { RewindSwiper, HorizontalList, NewsLayoutOne, ListByGenre, Theatre }
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Start-----------------------------------------------------------------Search Query-------------------------------------------------------------------------------------------------------------
+
+function SearchQuery() {
+  const [getQuery, setQuery] = useState("")
+
+  return (
+    <div className=" pt-[3em] w-[90%] m-auto ">
+      <div className="flex justify-center">
+        <div className=" w-full lg:w-1/2 relative">
+          <input
+            type="text"
+            name="query"
+            value={getQuery}
+            onChange={(e) => {
+              setQuery(e.target.value)
+            }}
+            autoComplete="off"
+            placeholder="What's on your mind ?"
+            className=" py-4 px-5 rounded-3xl w-full text-[#141414] text-xl bg-slate-100"
+          />
+          <span
+            className=" absolute top-4 right-4 cursor-pointer"
+            onClick={() => {
+              setQuery("")
+            }}
+          >
+            <CloseIcon style={{ color: "#141414" }} />
+          </span>
+        </div>
+      </div>
+      <div className=" pt-[5em]">
+        <SearchArea getQuery={getQuery} />
+      </div>
+    </div>
+  )
+}
+
+function SearchArea({ getQuery }: any) {
+  const initialDataFunc = async () => {
+    try {
+      const sendMovieParams = {
+        type: "movie",
+        find: "popularity",
+        genre: "null",
+        year: "2023",
+        page: "1",
+      }
+      const dynamicMovieData = await axios.get("/api/media/ott/locate", {
+        params: sendMovieParams,
+      })
+      const sendTvParams = {
+        type: "tv",
+        find: "popularity",
+        genre: "null",
+        year: "2023",
+        page: "1",
+      }
+      const dynamicTvData = await axios.get("/api/media/ott/locate", {
+        params: sendTvParams,
+      })
+      return dynamicMovieData.data.concat(dynamicTvData.data)
+    } catch (error) {
+      return null
+    }
+  }
+
+  const searchQueryFunc = async () => {
+    if (getQuery.length === 0) {
+      const getData = await initialDataFunc()
+      return getData
+    }
+    try {
+      const sendMovieParams = {
+        query: getQuery,
+      }
+      const dynamicData = await axios.get("/api/media/ott/search", {
+        params: sendMovieParams,
+      })
+
+      return dynamicData.data
+    } catch (error) {
+      return null
+    }
+  }
+
+  const { data, isLoading, isFetching, isSuccess } = useQuery({
+    queryKey: ["query/" + getQuery],
+    queryFn: searchQueryFunc,
+    staleTime: 1000 * 60 * 60,
+  })
+
+  if (isLoading || isFetching) {
+    return (
+      <div className=" min-h-screen flex justify-center items-center">
+        <div>
+          <CircularProgress />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="grid justify-items-center gap-5 grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto]">
+      {data &&
+        data.length > 0 &&
+        data.map((item: any, key: any) => {
+          if (item) {
+            return (
+              <div key={key}>
+                <div className=" py-2">
+                  <Link
+                    href={`/watch/${removeSpace(item.title)}?${item.type}=${
+                      item.id
+                    }`}
+                  >
+                    <Image
+                      src={item.poster}
+                      alt={item.title}
+                      width={500}
+                      height={600}
+                      loading="lazy"
+                      className=" rounded-2xl w-auto h-auto"
+                    ></Image>
+                  </Link>
+                </div>
+              </div>
+            )
+          }
+        })}
+    </div>
+  )
+}
+
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Start-----------------------------------------------------------------News Section-------------------------------------------------------------------------------------------------------------
+
+function NewsSlider() {
+  const divImage: any = {
+    backgroundImage: `url('No-Image-Placeholder.png')`,
+  }
+  const [getData, setData]: any = useState([])
+  const dynamicData = async ({ pageParam }: any) => {
+    try {
+      const sendParams = {
+        country: "in",
+        page: pageParam,
+      }
+      const dynamicData = await axios.get("/api/media/news/article", {
+        params: sendParams,
+      })
+
+      return dynamicData.data.articles
+    } catch (error) {
+      return null
+    }
+  }
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["articleSection"],
+    queryFn: dynamicData,
+    staleTime: 1000 * 60 * 60,
+  })
+
+  if (isLoading) {
+    return (
+      <div className="px-5">
+        <Skeleton
+          variant="rectangular"
+          width={"100%"}
+          height={"20vw"}
+          style={{ backgroundColor: "grey", borderRadius: "1rem" }}
+        />
+      </div>
+    )
+  }
+
+  if (isSuccess) {
+    return (
+      <div>
+        <div className=" w-[95%] md:w-[50%] m-auto relative">
+          <Swiper
+            direction={"vertical"}
+            className="mySwiper"
+            style={{ height: "85vh" }}
+          >
+            {data.map((item: any, key: any) => {
+              return (
+                <SwiperSlide key={key}>
+                  <div className=" bg-[#d3dfff] text-black rounded-[18px] h-full">
+                    <div>
+                      <img
+                        style={divImage}
+                        className=" rounded-t-[18px] bg-no-repeat bg-cover w-auto h-auto h-[11rem]"
+                        src={
+                          item.urlToImage
+                            ? item.urlToImage
+                            : "/No-Image-Placeholder.png"
+                        }
+                        alt={"MediaVerse"}
+                        loading="lazy"
+                        placeholder="/No-Image-Placeholder.png"
+                      />
+                    </div>
+                    <div className="p-[3em]">
+                      <Link href={item.url || "/"} target="_blank">
+                        <div className=" font-extrabold underline text-black hover:text-blue-600">
+                          {item.title}
+                        </div>
+                      </Link>
+                      <div className=" pt-5 italic">{item.content}</div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+          <div className=" absolute bottom-0 left-[45%] z-10 animate-bounce opacity-50">
+            <ArrowDropDownIcon
+              style={{ color: "red", width: "4rem", height: "4rem" }}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+//END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export {
+  RewindSwiper,
+  HorizontalList,
+  NewsLayoutOne,
+  ListByGenre,
+  Theatre,
+  SearchQuery,
+  NewsSlider,
+}
