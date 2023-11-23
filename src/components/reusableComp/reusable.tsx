@@ -1073,14 +1073,20 @@ function RecomendationGenre({ type, id }: any) {
                           return (
                             <div key={key}>
                               <div className=" py-2">
-                                <Image
-                                  src={item.poster}
-                                  alt={item.title}
-                                  width={500}
-                                  height={600}
-                                  loading="lazy"
-                                  className=" rounded-2xl w-auto h-auto"
-                                ></Image>
+                                <Link
+                                  href={`/watch/${removeSpace(
+                                    item.title
+                                  )}?${type}=${item.id}`}
+                                >
+                                  <Image
+                                    src={item.poster}
+                                    alt={item.title}
+                                    width={500}
+                                    height={600}
+                                    loading="lazy"
+                                    className=" rounded-2xl w-auto h-auto"
+                                  ></Image>
+                                </Link>
                               </div>
                             </div>
                           )
