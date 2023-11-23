@@ -771,27 +771,27 @@ function SeasonDetails({ id, parentSeason }: any) {
           modules={[Navigation]}
           grabCursor={true}
           spaceBetween={5}
-          slidesPerView={1.5}
+          slidesPerView={3}
           breakpoints={{
             320: {
               spaceBetween: 100,
-              slidesPerView: 4.5,
+              slidesPerView: 4,
             },
             481: {
               spaceBetween: 60,
-              slidesPerView: 4.5,
+              slidesPerView: 4,
             },
             769: {
               spaceBetween: 50,
-              slidesPerView: 4.5,
+              slidesPerView: 5,
             },
             1025: {
               spaceBetween: 5,
-              slidesPerView: 5.5,
+              slidesPerView: 5,
             },
             1536: {
               spaceBetween: 5,
-              slidesPerView: 6.5,
+              slidesPerView: 6,
             },
           }}
           allowTouchMove={true}
@@ -905,7 +905,7 @@ function ShowEpisode({ data }: any) {
                     getEpisode === item.episode_number ? "shadow-md" : ""
                   } shadow-slate-300`}
                 ></Image>
-                <div className="py-3">{item.name}</div>
+                <div className="py-3 text-[#fbf0f0]">{item.name}</div>
               </div>
             </SwiperSlide>
           )
@@ -1333,11 +1333,13 @@ function NewsSlider() {
                     </div>
                     <div className="p-[3em]">
                       <Link href={item.url || "/"} target="_blank">
-                        <div className=" font-extrabold underline text-black hover:text-blue-600">
+                        <div className=" font-extrabold underline text-black hover:text-blue-600 text-2xl md:text-3xl">
                           {item.title}
                         </div>
                       </Link>
-                      <div className=" pt-5 italic">{item.content}</div>
+                      <div className=" pt-5 italic text-2xl">
+                        {item.content}
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>
