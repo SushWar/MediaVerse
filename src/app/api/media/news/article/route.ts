@@ -8,18 +8,24 @@ const newsDomain = process.env.NEWS_DOMAIN!
 
 export async function GET(req: NextRequest) {
   try {
-    const reqPref = req.nextUrl.search.split("?")[1].split("&")
-    const extractParams = {
-      country: reqPref[0].split("=")[1],
-      page: reqPref[1].split("=")[1],
+    console.log("Inside ARTICLE server TRY block :- Getting params from url")
+
+    const createParams = {
+      apiKey: newsApiKey,
+      category: "entertainment",
+      country: req.nextUrl.searchParams.get("country"),
+      page: req.nextUrl.searchParams.get("pages"),
     }
 
-    const getData = await axios(
-      `${newsDomain}top-headlines?apiKey=${newsApiKey}&category=entertainment&country=${extractParams.country}&page=${extractParams.page}`
-    )
+    console.log("Inside ARTICLE server TRY block :- Sending News API call")
+    const getData = await axios.get(`${newsDomain}top-headlines`, {
+      params: createParams,
+    })
 
+    console.log("Inside ARTICLE server TRY block :- Sending data to client")
     return NextResponse.json(getData.data)
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Inside ARTICLE server CATCH block :- " + error.message)
     return NextResponse.json(error)
   }
 }

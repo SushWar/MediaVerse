@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import MenuOpenIcon from "@mui/icons-material/MenuOpen"
@@ -9,12 +8,14 @@ import Image from "next/image"
 import { pages } from "@/helper/contstant"
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import { Avatar } from "@mui/material"
+import SearchIcon from "@mui/icons-material/Search"
+import { usePathname } from "next/navigation"
 
 export default function NavPanel() {
   const matches = useMediaQuery("(min-width:1024px)")
 
   return (
-    <div className="navBar_bg fixed w-full z-20 opacity-95">
+    <div className="navBar_bg fixed w-full z-20">
       {matches ? <BigScreen /> : <SmallScreen />}
     </div>
   )
@@ -24,7 +25,7 @@ export default function NavPanel() {
 
 function BigScreen() {
   return (
-    <div className="w-[95%] m-auto py-4 ">
+    <div className="w-[95%] m-auto py-4">
       <div className=" flex justify-between items-center">
         <div className="flex gap-8 xl:gap-16 items-center">
           <div>
@@ -39,8 +40,6 @@ function BigScreen() {
           </div>
 
           <NavPageName />
-
-          <SearchContent />
         </div>
         <div className="flex gap-8 items-center">
           <div>
@@ -56,83 +55,34 @@ function BigScreen() {
 }
 
 function NavPageName() {
-  const [openPage, setOpenPage] = useState("")
+  const pathname = usePathname()
 
-  useEffect(() => {
-    const loc = window.location.href.split("/")[3]
-    setOpenPage(loc)
-  }, [])
   return (
     <div className="flex gap-8">
       {pages.map((item: any, key: any) => {
         return (
           <div key={key} className=" text-center">
             <div
-              className={`lg:text-lg xl:text-xl 2xl:text-2xl ${
-                openPage === item.link
+              className={`lg:text-xl xl:text-2xl 2xl:text-2xl ${
+                pathname === item.link
                   ? " text-[#141414] font-extrabold"
                   : "text-[#515151]"
               }`}
             >
-              <Link
-                href={"/" + item.link}
-                onClick={() => {
-                  setOpenPage(item.link)
-                }}
-              >
-                {item.name}
-              </Link>
+              <Link href={item.link}>{item.name}</Link>
             </div>
           </div>
         )
       })}
-    </div>
-  )
-}
-
-function SearchContent() {
-  const [open, setOpen] = useState(false)
-  const [query, setQuery] = useState("")
-
-  const handlChange = (event: any) => {
-    const { value } = event.target
-    setQuery(value)
-  }
-
-  return (
-    <div className=" relative">
-      <input
-        type="text"
-        placeholder="What's on your mind ?"
-        autoComplete="off"
-        spellCheck="false"
-        value={query}
-        onChange={handlChange}
-        className="rounded-3xl px-12 py-2 w-full text-lg text-slate-900"
-        onClick={() => {
-          setOpen(true)
-        }}
-      />
-      {open && (
-        <div
-          id="searchArea"
-          className=" absolute top-20 w-[50vw] -left-24 bg-red-300 rounded-xl h-[25rem] overflow-y-auto"
-        >
-          <div className="py-4 w-[95%] m-auto">
-            <div className=" flex justify-end">
-              <span
-                className=" cursor-pointer"
-                onClick={() => {
-                  setOpen(false)
-                }}
-              >
-                <CloseIcon />
-              </span>
-            </div>
-            <div>query</div>
-          </div>
-        </div>
-      )}
+      <Link href={"/search"}>
+        <SearchIcon
+          style={{
+            width: "2rem",
+            height: "2rem",
+            color: `${pathname === "/search" ? "#141414" : "#515151"}`,
+          }}
+        />
+      </Link>
     </div>
   )
 }
@@ -145,9 +95,9 @@ function SmallScreen() {
   return (
     <div className="relative">
       <div
-        className={`absolute top-[6px] -left-[6px] w-full z-10 bg-slate-500 ${
+        className={`absolute top-[6px] -left-[6px] w-full z-10 sidePanel_bg ${
           open ? "" : "-translate-x-full"
-        } duration-700 min-h-[95vh] rounded-lg`}
+        } duration-700 min-h-[99vh] rounded-lg`}
       >
         <SidePanel setOpen={setOpen} tablet={tablet} />
       </div>
@@ -157,20 +107,24 @@ function SmallScreen() {
             <Image
               src={"/logo.png"}
               alt="Media Verse"
-              width={50}
-              height={50}
+              width={33}
+              height={33}
               priority={true}
               className="w-auto h-auto"
             ></Image>
           </div>
-          <div>MEDIAVERSE</div>
+          <div className=" text-2xl font-extrabold text-[#0e111c]">
+            MediaVerse
+          </div>
           <div>
             <span
               onClick={() => {
                 setOpen(true)
               }}
             >
-              <MenuOpenIcon />
+              <MenuOpenIcon
+                style={{ width: "2.5rem", height: "2.5rem", color: "#0e111c" }}
+              />
             </span>
           </div>
         </div>
@@ -188,7 +142,9 @@ function SidePanel({ setOpen, tablet }: any) {
             setOpen(false)
           }}
         >
-          <CloseIcon />
+          <CloseIcon
+            style={{ width: "2.5rem", height: "2.5rem", color: "#d0e9ff" }}
+          />
         </span>
       </div>
       <div className=" text-center">
@@ -204,7 +160,7 @@ function SidePanel({ setOpen, tablet }: any) {
           </Avatar>
         </div>
         <div className="pt-16 flex flex-col gap-8">
-          <SideSearchArea />
+          <div className="flex justify-center"></div>
           <SidePanelNavPageName setOpen={setOpen} />
         </div>
       </div>
@@ -213,28 +169,36 @@ function SidePanel({ setOpen, tablet }: any) {
 }
 
 function SidePanelNavPageName({ setOpen }: any) {
-  const [openPage, setOpenPage] = useState("")
-
-  useEffect(() => {
-    const loc = window.location.href.split("/")[3]
-    setOpenPage(loc)
-  }, [])
+  const pathname = usePathname()
   return (
     <div className="flex flex-col gap-8">
+      <Link
+        href={"/search"}
+        onClick={() => {
+          setOpen(false)
+        }}
+      >
+        <SearchIcon
+          style={{
+            width: "2rem",
+            height: "2rem",
+            color: `${pathname === "/search" ? "#dcd2d2" : "#7d7b7b"}`,
+          }}
+        />
+      </Link>
       {pages.map((item: any, key: any) => {
         return (
           <div key={key} className=" text-center">
             <div
               className={` text-2xl ${
-                openPage === item.link
-                  ? " text-[#141414] font-extrabold"
-                  : "text-[#515151]"
+                pathname === item.link
+                  ? " text-[#dcd2d2] font-extrabold"
+                  : "text-[#7d7b7b]"
               }`}
             >
               <Link
-                href={"/" + item.link}
+                href={item.link}
                 onClick={() => {
-                  setOpenPage(item.link)
                   setOpen(false)
                 }}
               >
@@ -244,53 +208,6 @@ function SidePanelNavPageName({ setOpen }: any) {
           </div>
         )
       })}
-    </div>
-  )
-}
-
-function SideSearchArea() {
-  const [open, setOpen] = useState(false)
-  const [query, setQuery] = useState("")
-
-  const handlChange = (event: any) => {
-    const { value } = event.target
-    setQuery(value)
-  }
-
-  return (
-    <div className="relative">
-      <input
-        type="text"
-        placeholder="What's on your mind ?"
-        autoComplete="off"
-        spellCheck="false"
-        value={query}
-        onChange={handlChange}
-        className="rounded-3xl px-12 py-2 w-full text-lg text-slate-900"
-        onClick={() => {
-          setOpen(true)
-        }}
-      />
-      {open && (
-        <div
-          id="searchArea"
-          className=" absolute top-20 w-full bg-red-300 rounded-xl h-[25rem] overflow-y-auto"
-        >
-          <div className="py-4 w-[95%] m-auto">
-            <div className=" flex justify-end">
-              <span
-                className=" cursor-pointer"
-                onClick={() => {
-                  setOpen(false)
-                }}
-              >
-                <CloseIcon />
-              </span>
-            </div>
-            <div>query</div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

@@ -78,3 +78,12 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.sidePanel_bg {
+  background: linear-gradient(
+    90deg,
+    #131831 0.07%,
+    #080911 52.33%,
+    #131831 99.93%
+  );
+}

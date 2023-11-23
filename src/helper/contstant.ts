@@ -1,22 +1,22 @@
 const pages = [
   {
     name: "Home",
-    link: "",
+    link: "/",
     openPage: false,
   },
   {
     name: "Movies",
-    link: "movies",
+    link: "/movies",
     openPage: false,
   },
   {
     name: "TV Shows",
-    link: "tv",
+    link: "/tv",
     openPage: false,
   },
   {
     name: "Reel Talk",
-    link: "entertainmentnews",
+    link: "/entertainmentnews",
     openPage: false,
   },
 ]
