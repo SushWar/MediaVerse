@@ -1,6 +1,4 @@
 "use client"
-
-import axios from "axios"
 import { NewsSlider } from "../reusableComp/reusable"
 
 export default function NewsSection(prop: any) {

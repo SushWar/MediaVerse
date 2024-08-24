@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
     console.log(
       "Inside SEARCH server TRY block :- Filtering the data and checking watch providers"
     )
-
     let filterData: any = []
 
     for (let i = 0; i < getData.data.results.length; i++) {

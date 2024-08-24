@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-query"
 import { CircularProgress, useMediaQuery } from "@mui/material"
 import Skeleton from "@mui/material/Skeleton"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { removeSpace } from "@/helper/stringHelper"
@@ -30,7 +30,7 @@ function RewindSwiper({ type, find, genre, page }: any) {
         type: type,
         find: find,
         genre: genre,
-        year: "2023",
+        year: "2024",
         page: page,
       }
       const dynamicData = await axios.get("/api/media/ott/locate", {
@@ -142,14 +142,18 @@ function BigPoster({ item, type }: any) {
               <div className="bigPoster">
                 <div className="h-[100%] flex items-end">
                   <div className=" pl-3 pb-2">
-                    {logo && (
+                    {logo ? (
                       <Image
                         src={logo}
                         alt={item.title}
                         width={matches ? 300 : 150}
                         height={matches ? 200 : 100}
-                        // className="w-auto h-auto"
+                        className="w-auto h-auto"
                       ></Image>
+                    ) : (
+                      <div className=" text-4xl md:text-6xl text-slate-300">
+                        {data.name}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -1139,6 +1143,13 @@ function RecomendationGenre({ type, id }: any) {
 function SearchQuery() {
   const [getQuery, setQuery] = useState("")
 
+  useEffect(() => {
+    console.log("Search input mounted")
+
+    return () => {
+      console.log("Search input unmounted")
+    }
+  })
   return (
     <div className=" pt-[3em] w-[90%] m-auto ">
       <div className="flex justify-center">
@@ -1172,6 +1183,15 @@ function SearchQuery() {
 }
 
 function SearchArea({ getQuery }: any) {
+  // const searchRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    console.log("SearchArea input mounted")
+
+    return () => {
+      console.log("SearchArea input unmounted")
+    }
+  })
   const initialDataFunc = async () => {
     try {
       const sendMovieParams = {
@@ -1218,6 +1238,13 @@ function SearchArea({ getQuery }: any) {
       return null
     }
   }
+
+  // const startSearchOptimal = ()=>{
+  //   if(searchRef.current){
+  //     clearTimeout(searchRef.current)
+  //   }
+  //   const id =
+  // }
 
   const { data, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ["query/" + getQuery],
@@ -1326,7 +1353,7 @@ function NewsSlider() {
                     <div>
                       <img
                         style={divImage}
-                        className=" rounded-t-[18px] bg-no-repeat bg-cover w-auto h-auto h-[11rem]"
+                        className=" rounded-t-[18px] bg-no-repeat bg-cover w-auto md:h-auto h-[11rem]"
                         src={
                           item.urlToImage
                             ? item.urlToImage
