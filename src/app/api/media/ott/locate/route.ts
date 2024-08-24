@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
       page: extractParams.page,
       sort_by: `${extractParams.find}.desc`,
       watch_region: "IN",
-      with_watch_monetization_types: "free|ads|flatrate",
+      // with_watch_monetization_types: "free|ads|flatrate",
       with_genres: extractParams.genre,
       primary_release_year: extractParams.year,
     }
@@ -41,7 +41,6 @@ export async function GET(req: NextRequest) {
       { params: getParams }
     )
     console.log("Inside LOCATE server TRY block :- Filtering the Data")
-
     const filterData = getData.data.results.map((item: any) => {
       if (item.backdrop_path && item.poster_path) {
         return {
@@ -61,13 +60,4 @@ export async function GET(req: NextRequest) {
     console.error("Inside LOCATE server CATCH block :- " + error.message)
     return NextResponse.json(error)
   }
-
-  // const reqPref = req.nextUrl.search.split("?")[1].split("&")
-  // const extractParams = {
-  //   type: reqPref[0].split("=")[1],
-  //   find: reqPref[1].split("=")[1],
-  //   genre: reqPref[2].split("=")[1],
-  //   year: reqPref[3].split("=")[1],
-  //   page: reqPref[4].split("=")[1],
-  // }
 }

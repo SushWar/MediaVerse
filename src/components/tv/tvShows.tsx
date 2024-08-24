@@ -10,7 +10,7 @@ export default function TvShowsSection({}: any) {
           <RewindSwiper
             type={"tv"}
             find={"popularity"}
-            genre={"null"}
+            genre={"10759|80"}
             page={"1"}
           />
         </div>

@@ -8,8 +8,8 @@ export default function MovieSection({}: any) {
         <div className="pt-[2.8em] lg:pt-[4em]">
           <RewindSwiper
             type={"movie"}
-            find={"revenue"}
-            genre={"null"}
+            find={"popularity"}
+            genre={"28"}
             page={"1"}
           />
         </div>

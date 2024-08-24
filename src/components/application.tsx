@@ -1,5 +1,5 @@
 "use client"
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -15,7 +15,7 @@ const homeLayout = [
       <RewindSwiper
         type={"movie"}
         find={"popularity"}
-        genre={"null"}
+        genre={"28|16|35"}
         page={"1"}
       />
     ),
@@ -25,7 +25,7 @@ const homeLayout = [
       <HorizontalList
         type={"movie"}
         find={"revenue"}
-        genre={"null"}
+        genre={"28,35"}
         page={"1"}
         listHead={"Today's Hot Picks"}
       />
@@ -36,7 +36,7 @@ const homeLayout = [
       <HorizontalList
         type={"movie"}
         find={"vote_count"}
-        genre={"null"}
+        genre={"16,35"}
         page={"1"}
         listHead={"People's Choice"}
       />
@@ -47,7 +47,12 @@ const homeLayout = [
   },
   {
     func: (
-      <RewindSwiper type={"tv"} find={"popularity"} genre={"null"} page={"1"} />
+      <RewindSwiper
+        type={"tv"}
+        find={"popularity"}
+        genre={"10759|80"}
+        page={"1"}
+      />
     ),
   },
   {
@@ -55,7 +60,7 @@ const homeLayout = [
       <HorizontalList
         type={"tv"}
         find={"vote_count"}
-        genre={"null"}
+        genre={"35"}
         page={"1"}
         listHead={"Binge-Worthy TV Shows"}
       />
@@ -66,7 +71,7 @@ const homeLayout = [
       <HorizontalList
         type={"tv"}
         find={"popularity"}
-        genre={"null"}
+        genre={"80"}
         page={"2"}
         listHead={"TV Shows for Every Mood"}
       />
